@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ninja Gold</title>
+</head>
+<body>
+  <div class = 'container'>
+    <div id = 'gold'>
+      Your Gold <span>{{request.session.counter}}</span>
+    </div>
+    <div id = 'actions'>
+      <form action="/process_money" method='post'>
+        {% csrf_token %}
+        <input type="hidden" name="action" value= "farm">
+        <h2>Farm</h2>
+        (earns 10 - 20 golds)
+        <input type="submit" value="Find Gold!!">
+      </form>
+      <form action="/process_money" method='post'>
+        {% csrf_token %}
+        <input type="hidden" name="action" value= "cave">
+        <h2>Cave</h2>
+        (earns 5 - 10 golds)
+        <input type="submit" value="Find Gold!!">
+      </form>
+      <form action="/process_money" method='post'>
+        {% csrf_token %}
+        <input type="hidden" name="action" value= "house">
+        <h2>House</h2>
+        (earns 2 - 5 golds)
+        <input type="submit" value="Find Gold!!">
+      </form>
+      <form action="/process_money" method='post'>
+        {% csrf_token %}
+        <input type="hidden" name="action" value= "casino">
+        <h2>Casino</h2>
+        (earns/take 0 - 50 golds)
+        <input type="submit" value="Find Gold!!">
+      </form>
+    </div>
+      activities
+    <div id = 'activities'>
+      {% for activity in request.session.activities %}
+        <p>{{activity.action}}</p>
+        {% endfor %}
+    </div>
+    <form action="/reset">
+      {% csrf_token %}
+      <input type="submit" value='reset'>
+    </form>
+  </div>
+</body>
+</html>
